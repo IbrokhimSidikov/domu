@@ -1,0 +1,59 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../constants/app_colors.dart';
+
+class AppTextField extends StatefulWidget {
+  const AppTextField({super.key, this.hint, this.controller, this.validator, required this.obscureText, this.prefixIcon, this.inputFormatters, this.keyboardType, this.prefixText, this.onChanged, this.focusNode, this.style, this.textInputAction});
+
+  final String? hint;
+  final TextEditingController? controller;
+  final FormFieldValidator<String>? validator;
+  final bool obscureText;
+  final Widget? prefixIcon;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputType? keyboardType;
+  final String? prefixText;
+  final ValueChanged<String>? onChanged;
+  final FocusNode? focusNode;
+  final TextStyle? style;
+  final TextInputAction? textInputAction;
+
+  @override
+  State<AppTextField> createState() => _AppTextFieldState();
+}
+
+class _AppTextFieldState extends State<AppTextField> {
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      validator: widget.validator,
+      controller: widget.controller,
+      focusNode: widget.focusNode,
+      keyboardType: widget.keyboardType,
+      inputFormatters: widget.inputFormatters,
+      style: widget.style ?? TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w500),
+      obscureText: widget.obscureText,
+      onChanged: widget.onChanged,
+      textInputAction: widget.textInputAction ?? TextInputAction.done,
+      onFieldSubmitted: (_) {
+        widget.focusNode?.unfocus();
+      },
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
+        prefixIcon: widget.prefixIcon,
+        prefixText: widget.prefixText,
+        prefixStyle: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w500, color: Colors.black),
+        hintText: widget.hint ?? "",
+        hintStyle: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: AppColors.cx717281),
+        filled: true,
+        fillColor: AppColors.cxWhite,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: BorderSide.none,
+        ),
+      ),
+    );
+  }
+}
