@@ -31,6 +31,7 @@ class _TasksPageState extends State<TasksPage> {
                       subtitle: 'Kunlish ishlarim cheklisti',
                       titleColor: AppColors.cxFF462E,
                       onTap: () {
+                        context.push(AppRoutes.checklistsPage);
                       },
                     ),
                     const SizedBox(height: 12),
@@ -39,6 +40,7 @@ class _TasksPageState extends State<TasksPage> {
                       subtitle: "Menga yuklangan topshiriqlar",
                       titleColor: AppColors.cxBlack,
                       onTap: () {
+                        context.push(AppRoutes.assignmentPage);
                       },
                     ),
                   ],

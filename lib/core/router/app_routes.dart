@@ -9,6 +9,9 @@ import '../../features/education/presentation/pages/education_page.dart';
 import '../../features/main/presentation/pages/main_page.dart';
 import '../../features/profile/presentation/pages/profile_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
+import '../../features/task/presentation/pages/assignment_detail_page.dart';
+import '../../features/task/presentation/pages/assignment_page.dart';
+import '../../features/task/presentation/pages/checklists_page.dart';
 import '../../features/task/presentation/pages/tasks_page.dart';
 import '../../features/work-entry/presentation/pages/attendance_records.dart';
 import '../../features/work-entry/presentation/pages/work_entry_page.dart';
@@ -24,6 +27,9 @@ class AppRoutes {
   static const String workEntryPage = '/workEntryPage';
   static const String attendanceRecordsPage = '/attendanceRecordsPage';
   static const String tasksPage = '/tasksPage';
+  static const String checklistsPage = '/checklistsPage';
+  static const String assignmentPage = '/assignmentPage';
+  static const String assignmentDetailPage = '/assignmentDetailPage';
 
 
   static GoRouter createRouter(String initialLocation, {GlobalKey<NavigatorState>? navigatorKey}){
@@ -43,6 +49,15 @@ class AppRoutes {
           GoRoute(path: workEntryPage, builder: (context, state) => const WorkEntryPage(),),
           GoRoute(path: attendanceRecordsPage, builder: (context, state) => const AttendanceRecords(),),
           GoRoute(path: tasksPage, builder: (context, state) => const TasksPage(),),
+          GoRoute(path: checklistsPage, builder: (context, state) => const ChecklistsPage(),),
+          GoRoute(path: assignmentPage, builder: (context, state) => const AssignmentPage(),),
+          GoRoute(
+            path: assignmentDetailPage,
+            builder: (context, state) {
+              final assignment = state.extra as Map<String, dynamic>?;
+              return AssignmentDetailPage(assignment: assignment);
+            },
+          ),
     ]);
   }
 }
