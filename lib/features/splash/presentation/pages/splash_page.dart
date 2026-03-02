@@ -1,12 +1,12 @@
 import 'package:domu/core/constants/app_icons.dart';
-import 'package:domu/features/auth/presentation/pages/login_page.dart';
-import 'package:domu/features/main/presentation/pages/main_page.dart';
+import 'package:domu/core/router/app_routes.dart';
 import 'package:domu/features/splash/cubit/splash_cubit.dart';
 import 'package:domu/features/splash/cubit/splash_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_images.dart';
@@ -33,16 +33,10 @@ class _SplashPageState extends State<SplashPage> {
           initial: () {},
           loading: () {},
           authenticated: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const MainPage()),
-            );
+            context.go(AppRoutes.mainPage);
           },
           unauthenticated: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginPage()),
-            );
+            context.go(AppRoutes.loginPage);
           },
           error: (message) {},
         );

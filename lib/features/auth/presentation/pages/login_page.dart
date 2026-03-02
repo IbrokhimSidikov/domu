@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_colors.dart';
-import '../../../../core/router/app_routes.dart';
 import '../../../../core/shared/app_textfield.dart';
 import '../../../../core/utils/phone_input_formatter.dart';
+import '../../../main/presentation/pages/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,16 +14,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _phoneFocusNode = FocusNode();
-  final _textController = TextEditingController();
-  final _textFocusNode = FocusNode();
+  final _loginController = TextEditingController();
+  final _loginFocusNode = FocusNode();
+  final _passwordController = TextEditingController();
+  final _passwordFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
-          _textFocusNode.unfocus();
+          _loginFocusNode.unfocus();
+          _passwordFocusNode.unfocus();
         },
         child: Padding(
           padding: EdgeInsets.all( 24.w),
@@ -43,8 +44,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               93.verticalSpace,
               AppTextField(
-                controller: _textController,
-                focusNode: _textFocusNode,
+                controller: _loginController,
+                focusNode: _loginFocusNode,
                 keyboardType: TextInputType.text,
                 hint: 'Login',
                 obscureText: false,
@@ -56,11 +57,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
               22.verticalSpace,
               AppTextField(
-                controller: _textController,
-                focusNode: _textFocusNode,
+                controller: _passwordController,
+                focusNode: _passwordFocusNode,
                 keyboardType: TextInputType.text,
                 hint: 'Password',
-                obscureText: false,
+                obscureText: true,
                 style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w500,
@@ -75,7 +76,10 @@ class _LoginPageState extends State<LoginPage> {
                 height: 54.h,
                 child: ElevatedButton(
                   onPressed: () {
-                    context.push(AppRoutes.mainPage);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const MainPage()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.cxFF462E,
